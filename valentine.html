@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Will You Be My Valentine, Fatima? 🌹</title>
+
+<!-- Romantic Handwriting Font -->
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(to bottom right, #ff9a9e, #fad0c4);
+    text-align: center;
+    color: white;
+    overflow: hidden;
+}
+
+#content {
+    padding: 60px 20px;
+    position: relative;
+    z-index: 2;
+}
+
+h1 { 
+    font-size: 3em; 
+}
+
+p {
+    font-size: 1.3em;
+    max-width: 700px;
+    margin: 20px auto;
+    line-height: 1.6;
+}
+
+button {
+    padding: 15px 30px;
+    font-size: 18px;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    margin: 20px;
+    transition: 0.3s;
+}
+
+.yes { background-color: #ff4e50; color: white; }
+.no { background-color: white; color: #ff4e50; }
+
+button:hover { transform: scale(1.1); }
+
+.petal {
+    position: fixed;
+    top: -20px;
+    font-size: 22px;
+    animation: fall linear infinite;
+    opacity: 0.8;
+}
+
+@keyframes fall {
+    to { transform: translateY(110vh) rotate(360deg); }
+}
+
+.typing {
+    font-family: 'Great Vibes', cursive;  /* Romantic handwriting */
+    font-size: 2em;                        /* Bigger letters */
+    color: black;                           /* Elegant black text */
+    border-right: 3px solid black;
+    white-space: pre-line;
+    overflow: hidden;
+    display: inline-block;
+    animation: blink 0.7s infinite;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.2); /* subtle shadow */
+}
+
+@keyframes blink {
+    50% { border-color: transparent; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- MUSIC -->
+<audio id="bgMusic" src="music.mp3" loop></audio>
+
+<div id="content">
+    <h1>Fatima 🌹❤️</h1>
+    <p>
+        Even with miles between us, my heart belongs to you 🌹  
+        You are my peace, my happiness, my forever.
+    </p>
+
+    <h2>Will You Be My Valentine? 🌹</h2>
+
+    <button class="yes" onclick="celebrate()">Yes 💕🌹</button>
+    <button class="no" onclick="moveButton(this)">No 😜</button>
+</div>
+
+<script>
+// Continuous soft petals
+function createPetals() {
+    for (let i = 0; i < 15; i++) {
+        let petal = document.createElement("div");
+        petal.classList.add("petal");
+        petal.innerHTML = "🌹";
+        petal.style.left = Math.random() * window.innerWidth + "px";
+        petal.style.animationDuration = (Math.random() * 5 + 5) + "s";
+        document.body.appendChild(petal);
+    }
+}
+createPetals();
+
+function celebrate() {
+    // Start music with fade-in
+    let music = document.getElementById("bgMusic");
+    music.volume = 0;
+    music.play().catch(e => console.log("Music play blocked", e));
+    let fade = setInterval(function() {
+        if (music.volume < 0.4) music.volume += 0.02;
+        else clearInterval(fade);
+    }, 200);
+
+    // Celebration petals and hearts
+    const symbols = ["🌹","💖","✨"];
+    for (let i = 0; i < 100; i++) {
+        let petal = document.createElement("div");
+        petal.classList.add("petal");
+        petal.innerHTML = symbols[Math.floor(Math.random() * symbols.length)];
+        petal.style.left = Math.random() * window.innerWidth + "px";
+        petal.style.animationDuration = (Math.random() * 3 + 2) + "s";
+        document.body.appendChild(petal);
+    }
+
+    setTimeout(showFinalPage, 3000);
+}
+
+function showFinalPage() {
+    document.getElementById("content").innerHTML = `
+        <div style="
+            display:flex;
+            flex-direction:column;
+            justify-content:center;
+            align-items:center;
+            text-align:center;
+        ">
+            <h1 style="font-family:'Great Vibes', cursive; font-size:3.5em; color:black; text-shadow:2px 2px 3px rgba(0,0,0,0.3);">You Said YES! 🌹💍❤️</h1>
+            <p id="typedText" class="typing" style="font-size:2em; max-width:700px; line-height:1.6;"></p>
+        </div>
+    `;
+    typeMessage();
+}
+
+function typeMessage() {
+    const message = 
+`Fatima 🌹,
+
+When you said YES, you made my world brighter.
+
+Every beat of my heart whispers your name.
+No distance can ever change what I feel for you.
+
+I cherish every smile, every laugh, every moment we share—even across the miles.
+You are my peace, my inspiration, and my forever home.
+
+I promise to hold your heart gently, protect it, and love you endlessly.
+Through every sunrise and every storm, I will choose you—
+today, tomorrow, and in every lifetime. ❤️
+
+You are my dream come true, my laughter in silence,
+my calm in chaos, and my happiness without end.
+With you, even distance feels like a small adventure,
+because our hearts are always together. 🌹💖`;
+
+    let i = 0;
+    const speed = 45;
+
+    function typing() {
+        if (i < message.length) {
+            document.getElementById("typedText").innerHTML += message.charAt(i);
+            i++;
+            setTimeout(typing, speed);
+        }
+    }
+
+    typing();
+}
+
+function moveButton(button) {
+    button.style.position = "absolute";
+    button.style.top = Math.random() * window.innerHeight + "px";
+    button.style.left = Math.random() * window.innerWidth + "px";
+}
+</script>
+
+</body>
+</html>
